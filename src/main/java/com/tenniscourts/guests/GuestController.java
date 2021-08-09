@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class GuestController extends BaseRestController {
     
     private final GuestService guestservice;
     
-    @PostMapping(value="/guests")
+    @PostMapping(value="/guests-add")
     public Guest addGuest(@Valid @RequestBody Guest guest) {
         return guestservice.save(guest);
     } 
     
-    @PutMapping(value="/guests/{id}")
+    @PutMapping(value="/guests-update/{id}")
     public Guest updateGuest(@PathVariable("id") Long id, @Valid @RequestBody Guest newguest) {
         Guest guest = guestservice.findById(id).orElseThrow(() -> new GuestNotFoundException("Guest with ID: " + id + " is NOT FOUND!"));
         guest.setName(newguest.getName());
@@ -38,23 +38,23 @@ public class GuestController extends BaseRestController {
         return guestservice.save(guest);   
     } 
     
-    @DeleteMapping(value="/guests/{id}")
+    @DeleteMapping(value="/guests-delete/{id}")
     public String deleteGuest(@PathVariable("id") Long id) {
         Guest guest = guestservice.findById(id).orElseThrow(() -> new GuestNotFoundException("Guest with ID: " + id + " is NOT FOUND!"));
         guestservice.deleteById(guest.getId());
         return "Guest with ID :" + id + " is deleted";            
     }
     
-    @GetMapping(value="/guests/{id}")
+    @GetMapping(value="/guests-id/{id}")
     public Guest getGuestById(@PathVariable("id") Long id) {
-        Guest std = guestservice.findById(id).orElseThrow(() -> new GuestNotFoundException("Guest with ID:" + id + " is NOT FOUND!"));
-        return std;
+        Guest guest = guestservice.findById(id).orElseThrow(() -> new GuestNotFoundException("Guest with ID:" + id + " is NOT FOUND!"));
+        return guest;
     }
     
     @GetMapping(value="/guests/{name}")
     public Guest getGuestByName(@PathVariable("name") String name) {
-        Guest std = guestservice.findByName(name).orElseThrow(() -> new GuestNotFoundException("Guest with name:" + name + " is NOT FOUND!"));
-        return std;
+        Guest guest = guestservice.findByName(name).orElseThrow(() -> new GuestNotFoundException("Guest with name:" + name + " is NOT FOUND!"));
+        return guest;
     } 
     
     @GetMapping(value = "/guests")
