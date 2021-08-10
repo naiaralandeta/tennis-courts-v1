@@ -1,6 +1,8 @@
 package com.tenniscourts.reservations;
 
-import com.tenniscourts.schedules.Schedule;
+import com.tenniscourts.guests.*;
+import com.tenniscourts.schedules.*;
+import com.tenniscourts.tenniscourts.*;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -32,5 +34,24 @@ public class ReservationServiceTest {
         schedule.setStartDateTime(startDateTime);
         
         Assert.assertEquals(reservationService.getRefundValue(Reservation.builder().schedule(schedule).value(new BigDecimal(10L)).build()), new BigDecimal(10));
+    }
+    
+    @Test
+    public void bookNewReservation(){
+        
+        TennisCourtDTO tennisCourtDTO = new TennisCourtDTO();
+        tennisCourtDTO.setId(1l);
+
+        ScheduleDTO scheduleDTO = new ScheduleDTO();
+        scheduleDTO.setId(1l);
+        scheduleDTO.setStartDateTime(LocalDateTime.now());
+        scheduleDTO.setEndDateTime(LocalDateTime.now());
+        scheduleDTO.setTennisCourt(tennisCourtDTO);
+        
+        CreateReservationRequestDTO createReservationRequestDTO = new CreateReservationRequestDTO();
+        createReservationRequestDTO.setGuestId(1l);
+        createReservationRequestDTO.setScheduleId(1l);
+        
+        Assert.assertNotNull(reservationService.bookReservation(createReservationRequestDTO));        
     }
 }

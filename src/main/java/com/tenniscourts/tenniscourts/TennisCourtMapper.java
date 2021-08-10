@@ -2,6 +2,7 @@ package com.tenniscourts.tenniscourts;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface TennisCourtMapper {
@@ -9,4 +10,5 @@ public interface TennisCourtMapper {
 
     @InheritInverseConfiguration
     TennisCourt map(TennisCourtDTO source);
+    
 }

@@ -13,32 +13,55 @@ public class GuestService implements IGuest{
    
     private final GuestRespository guestRepository;
 
+    /**
+     *
+     * @param guest
+     * @return 
+     */
     //@PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public Guest save(Guest guest) {
         return guestRepository.save(guest);
     }
-    
-    //@PreAuthorize("hasAuthority('ADMIN')")
+
+    /**
+     *
+     * @param id from a guest
+     */
     @Override
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void deleteById(Long id) {
         guestRepository.deleteById(id);
     }
-    
-    //@PreAuthorize("hasAuthority('ADMIN')")
+
+    /**
+     *
+     * @param id from a guest
+     * @return a guest in the case that exist
+     */
     @Override
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public Optional<Guest> findById(Long id) {
         return guestRepository.findById(id);
     }
-    
-    //@PreAuthorize("hasAuthority('ADMIN')")
+
+    /**
+     *
+     * @param name of a guest
+     * @return a guest in case that exist
+     */
     @Override
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public Optional<Guest> findByName(String name) {
         return guestRepository.findByName(name);
     }
-    
-    //@PreAuthorize("hasAuthority('ADMIN')")
+
+    /**
+     *
+     * @return a list with all guests found it
+     */
     @Override
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public List<Guest> getAllGuests() {
         return guestRepository.findAll();
     }
